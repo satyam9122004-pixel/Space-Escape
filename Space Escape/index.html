@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <link rel="stylesheet" href="style.css" />
+
+  <body>
+    <div class="main">
+      <div class="space">
+        <div class="obstbox"></div>
+        <div id="ship">
+          <video src="resource/blast-effect.mp4"></video>
+        </div>
+      </div>
+      <div class="endgame">
+        <button onclick="restart()">Restart</button>
+      </div>
+    </div>
+    <audio src="resource/loud-explosion-425457.mp3"></audio>
+  </body>
+  <script>
+    let space = document.querySelector(".space");
+    const ship = document.getElementById("ship");
+    const endgame = document.querySelector(".endgame");
+    let obstbox = document.querySelector(".obstbox");
+    let video = document.getElementsByTagName("video")[0];
+    let audio = document.getElementsByTagName("audio")[0];
+    let object;
+    let interval;
+    let collisionlinterval;
+    let shipmovesound;
+    let obstclposprop;
+
+    //CREATION OF RANDOM OBSTICLE
+    function objcreate() {
+      let obstcl = document.createElement("div");
+      obstcl.classList.add("obj");
+      let size = Math.floor(Math.random() * 7) + 1; //1-7;
+
+      // set size of asteroid
+      obstcl.style.width = size + "rem";
+      obstcl.style.height = size + "rem";
+
+      obstbox.appendChild(obstcl);
+
+      // set position of asteriod
+      let spaceposprop = space.getBoundingClientRect();
+      obstclposprop = obstcl.getBoundingClientRect();
+
+      const x = Math.random();
+      const y = Math.ceil(90 * Math.random());
+
+      let rightmax = spaceposprop.width - obstclposprop.width;
+
+      obstcl.style.left = x * rightmax + "px";
+      obstcl.style.top = -5 + "%";
+
+      //SET DIFF ASTROID IMG ACC TO OBJ SIZE
+      switch (size) {
+        case 1:
+          obstcl.style.backgroundImage = 'url("resource/asteroid7.jpeg")';
+          obstcl.style.backgroundSize = 2 + "rem";
+          obstcl.style.backgroundPositionY = 50 + "%";
+          obstcl.style.backgroundPositionX = 50 + "%";
+          break;
+        case 2:
+          obstcl.style.backgroundImage = 'url("resource/asteroid6.jpeg")';
+          obstcl.style.backgroundSize = 2.5 + "rem";
+          obstcl.style.backgroundPositionY = 50 + "%";
+          obstcl.style.backgroundPositionX = 50 + "%";
+          break;
+        case 3:
+          obstcl.style.backgroundImage = 'url("resource/asteroid5.jpeg")';
+          obstcl.style.backgroundSize = 3.5 + "rem";
+          obstcl.style.backgroundPositionY = 50 + "%";
+          obstcl.style.backgroundPositionX = 50 + "%";
+          break;
+        case 4:
+          obstcl.style.backgroundImage = 'url("resource/asteroid4.jpeg")';
+          obstcl.style.backgroundSize = 4.5 + "rem";
+          obstcl.style.backgroundPositionY = 50 + "%";
+          obstcl.style.backgroundPositionX = 50 + "%";
+          break;
+        case 5:
+          obstcl.style.backgroundImage = 'url("resource/asteroid3.jpeg")';
+          obstcl.style.backgroundSize = 6.5 + "rem";
+          obstcl.style.backgroundPositionY = 50 + "%";
+          obstcl.style.backgroundPositionX = 50 + "%";
+          break;
+        case 6:
+          obstcl.style.backgroundImage = 'url("resource/asteroid2.jpeg")';
+          obstcl.style.backgroundSize = 7.5 + "rem";
+          obstcl.style.backgroundPositionY = 50 + "%";
+          obstcl.style.backgroundPositionX = 50 + "%";
+          break;
+        case 7:
+          obstcl.style.backgroundImage = 'url("resource/asteroid1 (1).jpeg")';
+          obstcl.style.backgroundSize = 7.5 + "rem";
+          obstcl.style.backgroundPositionY = 50 + "%";
+          obstcl.style.backgroundPositionX = 50 + "%";
+          break;
+      }
+
+      // to make asteroid move and remove after it reach to bottom
+      moveremoveobstcl(obstcl);
+    }
+
+    function moveremoveobstcl(obstcl) {
+      let topup = 0;
+      let con = setInterval(() => {
+        topup += 12;
+        obstcl.style.top = topup + "px";
+        obstclposprop = obstcl.getBoundingClientRect();
+        if (topup + obstclposprop.height >= space.clientHeight) {
+          obstcl.remove();
+          clearInterval(con);
+        }
+      }, 25);
+    }
+
+    //   STARTGAME AND SET INTERVAL
+
+    function startgame() {
+      //create obj
+      interval = setInterval(objcreate, 850);
+
+      // check collision every 50ms
+      collisionlinterval = setInterval(collision, 20);
+
+      //  reset things to previous after collsion - set ship background, remove blast effect
+      ship.style.backgroundImage =
+        'url("resource/shipimg3-removebg-preview.png")';
+      video.style.display = "none";
+      video.pause();
+      video.currentTime = 0;
+      endgame.style.display = "none";
+
+      //add opening soundeff
+      audio.src = "resource/shiplaunchaudio.mpeg";
+      audio.currentTime = 1;
+      audio.play();
+
+      shipmovesound = setTimeout(() => {
+        audio.src = "resource/spaceshipmove.mp3";
+        audio.currentTime = 1;
+        audio.loop = true;
+        audio.play();
+      }, 4000);
+    }
+
+    function restart() {
+      clearInterval(interval);
+      clearInterval(collisionlinterval);
+      startgame();
+    }
+
+    // SHIP CURSOR MOMENT
+    space.addEventListener("mousemove", function (e) {
+      const rect = space.getBoundingClientRect();
+      const shipRect = ship.getBoundingClientRect();
+
+      let x = e.clientX - rect.left;
+      let y = e.clientY - rect.top;
+
+      // STOP at right & bottom
+      x = Math.min(x, rect.width - shipRect.width);
+      y = Math.min(y, rect.height - shipRect.height);
+
+      // OPTIONAL: stop at left & top
+      x = Math.max(0, x);
+      y = Math.max(0, y);
+
+      ship.style.left = x + "px";
+      ship.style.top = y + "px";
+    });
+
+    // COLLISION
+    function collision() {
+      const shipposition = ship.getBoundingClientRect();
+      object = document.querySelectorAll(".obj");
+
+      object.forEach((obj) => {
+        let objposition = obj.getBoundingClientRect();
+
+        if (
+          shipposition.left < objposition.right &&
+          shipposition.right > objposition.left &&
+          shipposition.top < objposition.bottom &&
+          shipposition.bottom > objposition.top
+        ) {
+          clearInterval(interval);
+          clearInterval(collisionlinterval);
+          document.getElementsByTagName("button")[0].innerText = "Restart";
+          endgame.style.display = "block";
+
+          // remove old obstacles
+          document.querySelectorAll(".obj").forEach((o) => o.remove());
+
+          //play audio on collision
+          clearTimeout(shipmovesound);
+          audio.src = "resource/loud-explosion-425457.mp3";
+          audio.loop = false;
+          audio.play();
+          audio.currentTime = 0.5;
+
+          //blast effect
+          ship.style.backgroundImage = "url()";
+          video.style.display = "block";
+          video.play();
+        }
+      });
+    }
+
+    // set start button;
+    window.addEventListener("DOMContentLoaded", function () {
+      document.getElementsByTagName("button")[0].innerText = "Start";
+    });
+  </script>
+</html>

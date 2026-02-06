@@ -1,0 +1,148 @@
+html {
+  margin: 0px;
+  width: 100%;
+  height: 100%;
+  user-select: none;
+}
+body {
+  height: 100%;
+  width: 100%;
+  margin: 0px;
+  display: grid;
+  place-items: center;
+  background-color: rgb(22, 22, 44);
+  background-image: url("resource/spacrimg1.jpeg");
+  z-index: -1;
+}
+.main {
+  width: 80%;
+  height: 47rem;
+  /* border: 1px solid; */
+  z-index: 0;
+}
+.obstbox {
+  width: 100%;
+  height: 10%;
+  border: 1px solid red;
+  margin-bottom: 0rem;
+  padding: 0px;
+  box-sizing: border-box;
+  position: relative;
+  visibility: hidden;
+ 
+  z-index: 1;
+}
+.obj {
+  /* width: 1.3rem;
+  height: 1.3rem; 
+  border: 1px solid red;*/
+  border-radius: 50%;
+  position: absolute;
+  margin: 0px;
+  visibility: visible;
+  display: block;
+  /* animation: objdown 1s linear 1s 1 forwards;
+  transition: all s; */
+  z-index: 0;
+  background-image: url("resource/asteroid1\ \(1\).jpeg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.space {
+  /* border: 2px solid; */
+  position: relative;
+  width: 100%;
+  height: 90%;
+  background-image: url("resource/spacrimg1.jpeg");
+  background-repeat: no-repeat;
+  z-index: -1;
+  background-size: 100% 100%;
+}
+#ship {
+  /* border: 1px solid; */
+  width: 4.3rem;
+  height: 4.3rem;
+  position: absolute;
+  pointer-events: none;
+  background-image: url("resource/shipimg3-removebg-preview.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.endgame {
+  width: 30rem;
+  height: 15rem;
+  border: 1px solid;
+  z-index: 1;
+  display: flex;
+  position: absolute;
+  top: 20%;
+  left: calc(50% - 15rem);
+  background-color: rgba(240, 248, 255, 0.5);
+  opacity: 0.5;
+}
+button {
+  width: 5rem;
+  height: 3rem;
+  position: relative;
+  top: 40%;
+  left: 40%;
+}
+video {
+  display: none;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+}
+audio {
+  display: none;
+}
+
+/* @keyframes objdown {
+  0% {
+    position: relative;
+    visibility: visible;
+  }
+  5% {
+    top: 50%;
+  }
+  10% {
+    top: 120%;
+  }
+  15% {
+    top: 190%;
+  }
+  20% {
+    top: 260%;
+  }
+  24% {
+    top: 320%;
+  }
+  32% {
+    top: 390%;
+  }
+  40% {
+    top: 460%;
+  }
+  48% {
+    top: 530%;
+  }
+  56% {
+    top: 600%;
+  }
+  64% {
+    top: 700%;
+  }
+  80% {
+    top: 800%;
+  }
+  90% {
+    top: 900%;
+  }
+  100% {
+    top: 1050%;
+  } */
+}
