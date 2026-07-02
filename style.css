@@ -1,0 +1,165 @@
+html {
+  margin: 0px;
+  width: 100%;
+  height: 100%;
+  user-select: none;
+}
+body {
+  height: 100%;
+  width: 100%;
+  margin: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background-color: rgb(22, 22, 44);
+  background-image: url("resource/spaceimg3.jpeg");
+  z-index: -1;
+}
+.main {
+  width: 80%;
+  height: 100vh;
+  /* border: 1px solid green; */
+  z-index: 0;
+  position: relative;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+.obstbox {
+  width: 100%;
+  height: 10%;
+  /* border: 1px solid red; */
+  margin-bottom: 0rem;
+  padding: 0px;
+  box-sizing: border-box;
+  position: relative;
+  visibility: hidden;
+
+  z-index: 1;
+}
+.obj {
+  /* width: 1.3rem;
+  height: 1.3rem; 
+  border: 1px solid red;*/
+  border-radius: 50%;
+  position: absolute;
+  margin: 0px;
+  visibility: visible;
+  display: block;
+  /* animation: objdown 1s linear 1s 1 forwards;
+  transition: all s; */
+  z-index: 0;
+  background-image: url("resource/asteroid1\ \(1\).jpeg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.space {
+  /* border: 2px solid red; */
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-image: url("resource/spaceimg3.jpeg");
+  background-repeat: no-repeat;
+  z-index: -1;
+  background-size: 100% 100%;
+}
+#ship {
+  /* border: 1px solid RED; */
+  width: 68.8px;
+  height: 68.8px;
+  padding: 0pxs;
+  position: absolute;
+  pointer-events: none;
+  background-image: url("resource/shipimg3-removebg-preview.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: grid;
+  place-items: center;
+  /* animation: shiplaunch 1.8s ease-in 1 normal forwards; */
+}
+
+.laser {
+  height: 13px;
+  width: 3px;
+  border: 1px solid red;
+  border-radius: 2px;
+  position: absolute;
+  z-index: 4;
+  background-color: red;
+  transform: translateX(-50%);
+}
+
+.rocketengine {
+  width: 2rem;
+  height: 3rem;
+  /* border: 1px solid red; */
+  position: absolute;
+  bottom: -53px;
+  z-index: 9999;
+  padding: 0px;
+}
+
+#enginevid {
+  width: 100%;
+  position: absolute;
+  transform: rotateZ(90deg);
+  display: block;
+  margin: 0px;
+}
+
+.endgame {
+  width: 30rem;
+  height: 15rem;
+  border: 1px solid;
+  z-index: 1;
+  display: flex;
+  position: absolute;
+  top: 20%;
+  left: calc(50% - 15rem);
+  background-color: rgba(240, 248, 255, 0.5);
+  opacity: 0.5;
+}
+button {
+  width: 5rem;
+  height: 3rem;
+  position: relative;
+  top: 40%;
+  left: 40%;
+}
+#blastvid {
+  width: 36rem;
+  height: 15rem;
+  /* border: 1px solid; */
+  display: flex;
+  position: absolute;
+  top: 20%;
+  left: calc(50% - 18rem);
+  display: none;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  z-index: 5;
+}
+audio {
+  display: none;
+}
+
+.scrbrd {
+  width: 10%;
+  height: 4rem;
+  /* border: 1px solid red; */
+
+  position: absolute;
+  right: 1px;
+}
+p {
+  color: aqua;
+}
+
+@keyframes shiplaunch {
+  0% {
+    top: 110%;
+  }
+  100% {
+    top: 40%;
+  }
+}

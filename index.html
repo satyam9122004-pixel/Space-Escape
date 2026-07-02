@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <link rel="stylesheet" href="style.css" />
+  <body>
+    <div class="main">
+      <div class="space">
+        <div class="obstbox"></div>
+        <div id="ship">
+          <div class="rocketengine">
+            <video
+              id="enginevid"
+              src="resource/rockectengine.mp4"
+              autoplay
+              muted
+              loop
+              playsinline
+            ></video>
+          </div>
+          <video id="blastvid" src="resource/blast-effect.mp4"></video>
+        </div>
+      </div>
+      <div class="endgame">
+        <button onclick="restart()">Restart</button>
+      </div>
+    </div>
+    <div class="scrbrd">
+      <p></p>
+      <p></p>
+    </div>
+    <audio src="resource/loud-explosion-425457.mp3"></audio>
+  </body>
+  <script src="script.js"></script>
+</html>
